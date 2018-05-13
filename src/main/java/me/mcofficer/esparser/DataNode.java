@@ -27,7 +27,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 package me.mcofficer.esparser;
 
-import com.sun.istack.internal.Nullable;
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Collections;
 
