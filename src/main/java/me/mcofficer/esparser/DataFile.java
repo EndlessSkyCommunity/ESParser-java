@@ -57,14 +57,13 @@ public class DataFile {
     }
 
     private void parse(List<String> data) {
+        data.forEach(s -> s += "\n");
         Stack<DataNode> stack = new Stack<>();
         stack.add(root);
         Stack<Integer> whiteStack = new Stack<>();
         whiteStack.add(-1);
 
         for (String line : data) {
-            if (line.equals(""))
-                continue;
             char[] chars = line.toCharArray();
             int i = 0;
             int white = 0;
