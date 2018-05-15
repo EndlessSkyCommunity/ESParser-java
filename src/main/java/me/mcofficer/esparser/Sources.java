@@ -48,7 +48,10 @@ public class Sources {
             for (File dir : Objects.requireNonNull(pluginPath.toFile().listFiles(File::isDirectory)))
                 for (File subdir : Objects.requireNonNull(dir.listFiles(File::isDirectory)))
                     if (subdir.getName().equalsIgnoreCase("data"))
-                        Files.walk(subdir.toPath()).forEachOrdered(path -> files.add(path.toFile()));
+                        Files.walk(subdir.toPath()).forEachOrdered(path -> {
+                            if (!path.toFile().isDirectory())
+                                files.add(path.toFile());
+                        });
 
         return files;
     }
@@ -68,7 +71,10 @@ public class Sources {
             for (File dir : Objects.requireNonNull(pluginPath.toFile().listFiles(File::isDirectory)))
                 for (File subdir : Objects.requireNonNull(dir.listFiles(File::isDirectory)))
                     if (subdir.getName().equalsIgnoreCase("image"))
-                        Files.walk(subdir.toPath()).forEachOrdered(path -> files.put(subdir.toPath().relativize(path).toString(), path.toFile()));
+                        Files.walk(subdir.toPath()).forEachOrdered(path -> {
+                            if (!path.toFile().isDirectory())
+                                files.put(subdir.toPath().relativize(path).toString(), path.toFile());
+                        });
 
         return files;
     }
