@@ -61,7 +61,9 @@ public class DataFile {
         stack.add(root);
         Stack<Integer> whiteStack = new Stack<>();
 
-        for (String line: data) {
+        for (String line : data) {
+            if (line.equals(""))
+                continue;
             char[] chars = line.toCharArray();
             int i = 0;
             int white = 0;
