@@ -42,7 +42,10 @@ public class Sources {
     public static ArrayList<File> getSources(Path dataPath, @Nullable Path pluginPath) throws IOException {
         ArrayList<File> files = new ArrayList<>();
 
-        Files.walk(dataPath).forEachOrdered(path -> files.add(path.toFile()));
+        Files.walk(dataPath).forEachOrdered(path -> {
+            if (!path.toFile().isDirectory())
+                files.add(path.toFile());
+        });
 
         if (pluginPath != null)
             for (File dir : Objects.requireNonNull(pluginPath.toFile().listFiles(File::isDirectory)))
@@ -65,7 +68,10 @@ public class Sources {
     public static HashMap<String, File> getImages(Path imagePath, @Nullable Path pluginPath) throws IOException{
         HashMap<String, File> files = new HashMap<>();
 
-        Files.walk(imagePath).forEachOrdered(path -> files.put(imagePath.relativize(path).toString(), path.toFile()));
+        Files.walk(imagePath).forEachOrdered(path -> {
+            if (!path.toFile().isDirectory())
+                files.put(imagePath.relativize(path).toString(), path.toFile());
+        });
 
         if (pluginPath != null)
             for (File dir : Objects.requireNonNull(pluginPath.toFile().listFiles(File::isDirectory)))
