@@ -33,6 +33,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
+import java.util.stream.Collectors;
 
 public class DataFile {
 
@@ -57,7 +58,7 @@ public class DataFile {
     }
 
     private void parse(List<String> data) {
-        data.forEach(s -> s += "\n");
+        data = data.stream().map(s -> s += "\n").collect(Collectors.toList());
         Stack<DataNode> stack = new Stack<>();
         stack.add(root);
         Stack<Integer> whiteStack = new Stack<>();
