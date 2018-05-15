@@ -60,6 +60,7 @@ public class DataFile {
         Stack<DataNode> stack = new Stack<>();
         stack.add(root);
         Stack<Integer> whiteStack = new Stack<>();
+        whiteStack.add(-1);
 
         for (String line : data) {
             if (line.equals(""))
@@ -75,13 +76,13 @@ public class DataFile {
             if (chars[i] == '#' | chars[i] == '\n')
                 continue;
 
-            while (whiteStack.get(whiteStack.size() - 1) >= white) {
+            while (whiteStack.peek() >= white) {
                 whiteStack.pop();
                 stack.pop();
             }
 
             DataNode node = new DataNode(null, null, null);
-            stack.get(stack.size() - 1).append(node);
+            stack.peek().append(node);
 
             stack.add(node);
             whiteStack.add(white);
