@@ -97,7 +97,7 @@ public class DataFile {
 
                 String token = "";
                 if (isQuoted) {
-                    while (chars[i] != '\n' || chars[i] != endQuote) {
+                    while (chars[i] != '\n' && chars[i] != endQuote) {
                         token += chars[i];
                         i += 1;
                     }
